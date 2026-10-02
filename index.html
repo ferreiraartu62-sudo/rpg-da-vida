@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>RPG da Vida — Ultimate</title>
+<style>
+:root{--bg:#070a12;--panel:#111827;--panel2:#0c1321;--line:#27334b;--txt:#f5f7ff;--muted:#8793aa;--gold:#f4c95d;--green:#63e6a7;--blue:#62a5ff;--purple:#b18cff;--red:#ff6b7b;--orange:#ff9d55}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#263b67 0,#0b1020 33%,#060910 75%);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,sans-serif}.app{max-width:720px;margin:auto;padding:12px 12px 80px}
+.top{display:flex;justify-content:space-between;align-items:center;margin:4px 3px 13px}.logo{font-weight:950;font-size:21px}.logo span{color:var(--gold)}.date{font-size:11px;color:var(--muted)}
+.card{background:linear-gradient(145deg,#141d30,#0d1422);border:1px solid var(--line);border-radius:20px;padding:14px;margin:10px 0;box-shadow:0 12px 35px #0006}
+.hero{display:grid;grid-template-columns:82px 1fr 65px;gap:13px;align-items:center}.avatar{width:82px;height:82px;border-radius:22px;border:2px solid #3a4e75;background:radial-gradient(circle,#273b65,#0b1220);display:grid;place-items:center;font-size:45px}.rank{font-size:11px;color:var(--gold);font-weight:900;text-transform:uppercase;letter-spacing:1px}.name{font-weight:900;font-size:19px}.level{text-align:center;font-weight:950;font-size:38px;line-height:.85}.level small{display:block;font-size:9px;color:var(--muted);letter-spacing:1px}.bar{height:10px;background:#222c41;border-radius:99px;overflow:hidden;margin:7px 0}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--green),#a4f7ce);border-radius:99px;transition:.35s}.xpinfo{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}
+.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0}.nav button{background:#101827;color:#aeb9cc;border:1px solid var(--line);border-radius:12px;padding:9px 4px;font-size:11px;font-weight:850}.nav button.active{background:#1b2a46;color:#fff;border-color:#49658e}
+h2{font-size:17px;margin:0 0 11px}.small{font-size:11px;color:var(--muted)}.section{display:flex;justify-content:space-between;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mission{position:relative;min-height:102px;background:#0b1322;border:1px solid #283650;border-radius:15px;padding:12px;cursor:pointer}.mission.done{background:#0d1b18;border-color:#356e59;opacity:.68}.mi{font-size:25px}.mn{font-weight:900;font-size:13px;margin-top:3px}.md{font-size:10px;color:var(--muted)}.mxp{position:absolute;right:9px;top:9px;color:var(--green);font-size:10px;font-weight:950}
+button{border:0;border-radius:10px;padding:10px 12px;background:var(--green);color:#06130d;font-weight:900;cursor:pointer}.secondary{background:#27334a;color:white}.danger{background:#54212d;color:#ffdce1}.gold{background:var(--gold);color:#191204}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.boss{background:linear-gradient(145deg,#241c0d,#111622);border-color:#5d4b1c}.boss h2{color:var(--gold)}.bossbar{height:9px;background:#382f1c;border-radius:99px;overflow:hidden;margin:8px 0}.bossbar div{height:100%;background:var(--gold);width:0}.bossline{display:flex;justify-content:space-between;font-size:11px}
+.attr{margin:12px 0}.attrhead{display:flex;justify-content:space-between;font-size:12px;font-weight:850}.attrbar{height:8px;background:#202a3f;border-radius:99px;overflow:hidden;margin-top:5px}.attrbar div{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple))}
+.skill{display:flex;align-items:center;gap:10px;background:#0c1423;border:1px solid var(--line);border-radius:14px;padding:11px;margin:7px 0}.skillicon{font-size:25px}.skillinfo{flex:1}.skillinfo b{font-size:13px}.skillinfo span{display:block;font-size:10px;color:var(--muted)}.locked{opacity:.42}
+.quest{padding:12px;border:1px solid var(--line);border-radius:14px;background:#0b1321;margin:8px 0}.questtop{display:flex;justify-content:space-between;gap:8px}.tag{font-size:9px;padding:4px 7px;border-radius:99px;background:#25314a;color:#b9c6db}.quest b{font-size:13px}.quest p{font-size:11px;color:var(--muted);margin:7px 0}.questbar{height:6px;background:#202b40;border-radius:99px;overflow:hidden}.questbar div{height:100%;background:var(--blue)}
+.ach{display:flex;align-items:center;gap:10px;padding:10px;background:#0c1422;border:1px solid var(--line);border-radius:13px}.ach.lock{opacity:.38}.badge{width:39px;height:39px;border-radius:12px;background:#202b43;display:grid;place-items:center;font-size:20px}.ach b{font-size:12px}.ach span{display:block;font-size:10px;color:var(--muted)}
+.reward{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0c1422;border:1px solid var(--line);border-radius:13px;padding:11px;margin:7px 0}.reward b{font-size:12px}.cost{color:var(--gold);font-size:10px;font-weight:900}.reward button:disabled{opacity:.3}
+.history{display:flex;gap:4px;flex-wrap:wrap}.daybox{width:23px;height:23px;border-radius:6px;background:#172033;border:1px solid #26334b}.daybox.on{background:#48bb8a;border-color:#70e0b0}.daybox.today{outline:2px solid var(--gold)}
+input,textarea,select{width:100%;background:#0a1220;color:white;border:1px solid var(--line);border-radius:11px;padding:10px;font:inherit}label{font-size:10px;color:var(--muted);display:block;margin:8px 0 4px}
+.hidden{display:none}.toast{position:fixed;left:50%;bottom:17px;transform:translate(-50%,25px);opacity:0;transition:.25s;background:#effff6;color:#06130d;font-weight:950;border-radius:13px;padding:11px 15px;z-index:20;box-shadow:0 10px 35px #0008}.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#5e6a82;font-size:10px;margin-top:20px}@media(max-width:440px){.hero{grid-template-columns:67px 1fr 52px}.avatar{width:67px;height:67px;font-size:36px}.level{font-size:31px}.nav button{font-size:10px}.card{padding:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="logo">⚔️ RPG DA VIDA <span>ULTIMATE</span></div><div class="date" id="date"></div></div>
+
+<div class="card">
+ <div class="hero">
+  <div class="avatar" id="avatar">🧙</div>
+  <div><div class="rank" id="rank">Novato</div><div class="name" id="pname">Seu Personagem</div>
+   <div class="bar"><div class="fill" id="xpbar"></div></div><div class="xpinfo"><span id="xp">0/500 XP</span><span id="coins">🪙 0</span></div>
+  </div>
+  <div class="level"><small>NÍVEL</small><span id="level">1</span></div>
+ </div>
+</div>
+
+<div class="nav">
+<button class="active" onclick="tab('home',this)">🏠<br>Base</button>
+<button onclick="tab('missions',this)">⚔️<br>Quests</button>
+<button onclick="tab('skills',this)">🧬<br>Skills</button>
+<button onclick="tab('ach',this)">🏆<br>Conquistas</button>
+<button onclick="tab('shop',this)">🎁<br>Loja</button>
+</div>
+
+<section id="home">
+ <div class="card"><div class="section"><h2>🎯 Missões de hoje</h2><span class="small" id="todayxp">0 XP</span></div><div class="grid" id="daily"></div>
+  <div class="actions"><button class="secondary" onclick="minimum()">⚡ Modo mínimo</button><button class="secondary" onclick="tab('stats',document.querySelectorAll('.nav button')[2])">📊 Atributos</button></div>
+ </div>
+ <div class="card boss"><h2>🐉 CHEFÃO SEMANAL</h2><b>Complete 5 sessões de desenvolvimento.</b><div class="bossbar"><div id="bossbar"></div></div><div class="bossline"><span id="bosst">0/5</span><span>🏆 +150 XP • 🪙 +100</span></div><div class="actions"><button class="gold" id="bossbtn" onclick="claimBoss()">Derrotar chefão</button></div></div>
+ <div class="card"><div class="section"><h2>📅 Histórico</h2><span class="small">últimos 28 dias</span></div><div class="history" id="history"></div></div>
+</section>
+
+<section id="missions" class="hidden">
+ <div class="card"><h2>⚔️ Campanhas</h2><div id="quests"></div></div>
+ <div class="card"><h2>🎯 Foco do personagem</h2><textarea id="focus" rows="3" placeholder="Ex.: melhorar finalização, dominar álgebra..."></textarea><br><br><button onclick="saveFocus()">Salvar foco</button></div>
+</section>
+
+<section id="skills" class="hidden">
+ <div class="card"><h2>🧬 Árvore de habilidades</h2><p class="small">Pontos de habilidade são ganhos ao subir de nível. Desbloqueie vantagens simbólicas para personalizar sua progressão.</p><div id="skillslist"></div></div>
+ <div class="card"><h2>📊 Atributos</h2><div id="attrs"></div></div>
+</section>
+
+<section id="ach" class="hidden"><div class="card"><h2>🏆 Conquistas</h2><div id="achievements" style="display:grid;gap:8px"></div></div></section>
+
+<section id="shop" class="hidden">
+ <div class="card"><h2>🛒 Loja de recompensas</h2><p class="small">Você decide com seus responsáveis quais recompensas são permitidas. As moedas não são dinheiro real.</p><div id="shoplist"></div></div>
+ <div class="card"><h2>🧙 Personagem</h2><label>Nome</label><input id="nameInput" maxlength="24"><label>Avatar</label><select id="avatarInput"><option>🧙</option><option>🥷</option><option>🦸</option><option>⚽</option><option>🧠</option><option>🏆</option></select><br><br><button onclick="saveCharacter()">Salvar personagem</button></div>
+ <div class="card"><h2>⚙️ Dados</h2><button class="danger" onclick="resetAll()">Resetar personagem</button></div>
+</section>
+
+<footer>Progresso salvo localmente neste navegador. Não apague os dados do navegador.</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const D=[
+{id:"football",i:"⚽",n:"Treino de futebol",d:"45 min",xp:75,c:20,a:"football"},
+{id:"math",i:"🧮",n:"Matemática / OBMEP",d:"45 min",xp:75,c:20,a:"math"},
+{id:"english",i:"🇺🇸",n:"Inglês",d:"30 min",xp:50,c:15,a:"english"},
+{id:"fitness",i:"💪",n:"Físico",d:"30 min",xp:50,c:15,a:"fitness"},
+{id:"discipline",i:"📵",n:"Disciplina digital",d:"sem celular no estudo",xp:15,c:5,a:"discipline"}];
+const A={football:"⚽ Futebol",math:"🧮 Matemática",english:"🇺🇸 Inglês",fitness:"💪 Físico",discipline:"🧠 Disciplina"};
+const ranks=["Novato","Aprendiz","Iniciante","Praticante","Competente","Avançado","Especialista","Elite","Mestre","Lenda"];
+const QUESTS=[
+{id:"q1",n:"Campanha do Futebol",tag:"⚽",d:"Complete 10 sessões de futebol.",need:10,type:"football",reward:200},
+{id:"q2",n:"Campanha da Matemática",tag:"🧮",d:"Complete 10 sessões de matemática.",need:10,type:"math",reward:200},
+{id:"q3",n:"Campanha do Inglês",tag:"🇺🇸",d:"Complete 10 sessões de inglês.",need:10,type:"english",reward:200},
+{id:"q4",n:"Campanha do Físico",tag:"💪",d:"Complete 10 sessões de físico.",need:10,type:"fitness",reward:200}];
+const ACH=[
+{id:"first",i:"🌱",n:"Primeiro passo",d:"Complete sua primeira missão.",ok:s=>s.total>0},
+{id:"days7",i:"🔥",n:"7 dias ativos",d:"Tenha 7 dias ativos.",ok:s=>s.days.length>=7},
+{id:"xp1",i:"💎",n:"1.000 XP",d:"Acumule 1.000 XP.",ok:s=>s.total>=1000},
+{id:"xp5",i:"👑",n:"5.000 XP",d:"Acumule 5.000 XP.",ok:s=>s.total>=5000},
+{id:"level5",i:"⚔️",n:"Nível 5",d:"Chegue ao nível 5.",ok:s=>Math.floor(s.total/500)+1>=5},
+{id:"boss",i:"🐉",n:"Caçador de chefões",d:"Derrote um chefão.",ok:s=>s.bosses>=1},
+{id:"all",i:"🌟",n:"Dia perfeito",d:"Complete todas as missões diárias.",ok:s=>s.perfect>=1}];
+const SHOP=[
+{id:"movie",i:"🎬",n:"Noite de filme",c:100},{id:"game",i:"🎮",n:"Sessão extra de jogo",c:150},
+{id:"snack",i:"🍿",n:"Lanche especial",c:200},{id:"custom",i:"🏆 Recompensa especial",c:500}];
+const SK=[
+{id:"focus",i:"🎯",n:"Foco",d:"Seu personagem aprende a iniciar tarefas sem negociação.",cost:1},
+{id:"streak",i:"🔥",n:"Consistência",d:"Você valoriza voltar depois de um dia ruim.",cost:2},
+{id:"power",i:"⚔️",n:"Determinação",d:"Transforme sessões difíceis em progresso.",cost:3},
+{id:"master",i:"👑",n:"Mestre",d:"Símbolo de uma campanha longa concluída.",cost:5}];
+let S=JSON.parse(localStorage.getItem("rpgUltimate")||"null")||{
+total:0,coins:0,days:[],completed:{},attrs:{football:0,math:0,english:0,fitness:0,discipline:0},
+bossWeek:"",boss:0,bosses:0,claimedBoss:false,focus:"",name:"Seu Personagem",avatar:"🧙",
+perfect:0,sessions:{football:0,math:0,english:0,fitness:0},questClaimed:{},skillPts:0,skills:{},shopCount:{}
+};
+function day(){return new Date().toISOString().slice(0,10)}
+function week(){let d=new Date(),o=new Date(d.getFullYear(),0,1);return d.getFullYear()+"-"+Math.ceil((((d-o)/86400000)+o.getDay()+1)/7)}
+function ensure(){if(!S.completed[day()])S.completed[day()]={};if(S.bossWeek!==week()){S.bossWeek=week();S.boss=0;S.claimedBoss=false}}
+function save(){localStorage.setItem("rpgUltimate",JSON.stringify(S));render()}
+function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1800)}
+function render(){
+ ensure();let done=S.completed[day()]||{},today=Object.values(done).reduce((a,x)=>a+x.xp,0),lv=Math.floor(S.total/500)+1,into=S.total%500;
+ document.getElementById("date").textContent=new Date().toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"});
+ document.getElementById("pname").textContent=S.name;document.getElementById("avatar").textContent=S.avatar;document.getElementById("level").textContent=lv;
+ document.getElementById("rank").textContent=ranks[Math.min(ranks.length-1,Math.floor((lv-1)/3))];document.getElementById("xp").textContent=into+" / 500 XP";document.getElementById("xpbar").style.width=(into/5)+"%";document.getElementById("coins").textContent="🪙 "+S.coins;document.getElementById("todayxp").textContent=today+" XP";
+ document.getElementById("bossbar").style.width=Math.min(100,S.boss/5*100)+"%";document.getElementById("bosst").textContent=Math.min(5,S.boss)+"/5 sessões";document.getElementById("bossbtn").disabled=S.boss<5||S.claimedBoss;document.getElementById("bossbtn").textContent=S.claimedBoss?"✓ Chefão derrotado":"Derrotar chefão";
+ document.getElementById("focus").value=S.focus;document.getElementById("nameInput").value=S.name;document.getElementById("avatarInput").value=S.avatar;
+ document.getElementById("daily").innerHTML=D.map(m=>`<div class="mission ${done[m.id]?'done':''}" onclick="toggle('${m.id}')"><span class="mi">${m.i}</span><span class="mxp">${done[m.id]?'✓':'+'+m.xp+' XP'}</span><div class="mn">${m.n}</div><div class="md">${m.d}</div></div>`).join("");
+ document.getElementById("quests").innerHTML=QUESTS.map(q=>{let p=Math.min(q.need,S.sessions[q.type]||0),cl=S.questClaimed[q.id];return `<div class="quest"><div class="questtop"><b>${q.tag} ${q.n}</b><span class="tag">${cl?'CONCLUÍDA':'CAMPANHA'}</span></div><p>${q.d}</p><div class="questbar"><div style="width:${p/q.need*100}%"></div></div><div class="section" style="margin-top:6px"><span class="small">${p}/${q.need}</span>${p>=q.need&&!cl?`<button onclick="claimQuest('${q.id}')">+${q.reward} XP</button>`:''}</div></div>`}).join("");
+ document.getElementById("attrs").innerHTML=Object.entries(A).map(([id,n])=>{let v=S.attrs[id]||0;return `<div class="attr"><div class="attrhead"><span>${n}</span><span>${v} XP</span></div><div class="attrbar"><div style="width:${Math.min(100,v/1000*100)}%"></div></div></div>`}).join("");
+ document.getElementById("skillslist").innerHTML=SK.map(k=>{let on=S.skills[k.id];return `<div class="skill ${on?'':'locked'}"><div class="skillicon">${k.i}</div><div class="skillinfo"><b>${k.n}</b><span>${k.d}</span></div>${on?'<b>✓</b>':`<button ${S.skillPts<k.cost?'disabled':''} onclick="buySkill('${k.id}')">${k.cost} SP</button>`}</div>`}).join("")+`<div class="small" style="margin-top:10px">Pontos disponíveis: <b style="color:var(--gold)">${S.skillPts}</b></div>`;
+ document.getElementById("achievements").innerHTML=ACH.map(a=>`<div class="ach ${a.ok(S)?'':'lock'}"><div class="badge">${a.i}</div><div><b>${a.ok(S)?'✓ ':''}${a.n}</b><span>${a.d}</span></div></div>`).join("");
+ document.getElementById("shoplist").innerHTML=SHOP.map(r=>`<div class="reward"><div><b>${r.i} ${r.n}</b><div class="cost">🪙 ${r.c}</div></div><button ${S.coins<r.c?'disabled':''} onclick="buy('${r.id}')">Resgatar</button></div>`).join("");
+ let h="";for(let i=27;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);let k=d.toISOString().slice(0,10);h+=`<div class="daybox ${S.days.includes(k)?'on':''} ${k===day()?'today':''}" title="${k}"></div>`}document.getElementById("history").innerHTML=h;
+}
+function toggle(id){
+ ensure();let d=S.completed[day()]||{},m=D.find(x=>x.id===id);
+ let oldLv=Math.floor(S.total/500)+1;
+ if(d[id]){S.total-=d[id].xp;S.coins-=d[id].c;S.attrs[m.a]-=d[id].xp;if(S.sessions[m.a]!==undefined)S.sessions[m.a]--;delete d[id]}
+ else{d[id]={xp:m.xp,c:m.c};S.total+=m.xp;S.coins+=m.c;if(S.attrs[m.a]!==undefined)S.attrs[m.a]+=m.xp;if(S.sessions[m.a]!==undefined)S.sessions[m.a]++;if(!S.days.includes(day()))S.days.push(day());S.boss=Math.min(5,S.boss+1)}
+ if(Object.keys(d).length===D.length&&!d.perfect){d.perfect=true;S.perfect++;S.total+=100;S.coins+=30;toast("🌟 DIA PERFEITO! +100 XP +30 🪙")}
+ S.completed[day()]=d;let newLv=Math.floor(S.total/500)+1;if(newLv>oldLv){S.skillPts+=newLv-oldLv;toast("⬆️ LEVEL UP! +"+(newLv-oldLv)+" ponto(s) de habilidade")}else toast(d[id]?"Missão desmarcada":"Missão concluída! +"+m.xp+" XP");save()
+}
+function minimum(){
+ ensure();let d=S.completed[day()]||{},gain=0;
+ D.slice(0,4).forEach(m=>{if(!d[m.id]){d[m.id]={xp:20,c:5};gain+=20;S.attrs[m.a]+=20;if(S.sessions[m.a]!==undefined)S.sessions[m.a]++}});
+ if(gain){S.total+=gain;S.coins+=20;if(!S.days.includes(day()))S.days.push(day());S.boss=Math.min(5,S.boss+1);S.completed[day()]=d;save();toast("⚡ Modo mínimo: +"+gain+" XP")}else toast("Você já fez o mínimo de hoje.")}
+function claimBoss(){if(S.boss>=5&&!S.claimedBoss){S.total+=150;S.coins+=100;S.bosses++;S.claimedBoss=true;save();toast("🐉 CHEFÃO DERROTADO! +150 XP +100 🪙")}}
+function claimQuest(id){let q=QUESTS.find(x=>x.id===id);if((S.sessions[q.type]||0)>=q.need&&!S.questClaimed[id]){S.total+=q.reward;S.questClaimed[id]=true;save();toast("⚔️ CAMPANHA CONCLUÍDA! +"+q.reward+" XP")}}
+function buySkill(id){let k=SK.find(x=>x.id===id);if(!S.skills[id]&&S.skillPts>=k.cost){S.skillPts-=k.cost;S.skills[id]=true;save();toast("🧬 Habilidade desbloqueada: "+k.n)}}
+function buy(id){let r=SHOP.find(x=>x.id===id);if(S.coins>=r.c){S.coins-=r.c;S.shopCount[id]=(S.shopCount[id]||0)+1;save();toast("🎁 Recompensa resgatada: "+r.n)}}
+function saveFocus(){S.focus=document.getElementById("focus").value;save();toast("🎯 Foco salvo")}
+function saveCharacter(){S.name=document.getElementById("nameInput").value.trim()||"Seu Personagem";S.avatar=document.getElementById("avatarInput").value;save();toast("🧙 Personagem atualizado")}
+function tab(id,el){document.querySelectorAll("section").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));el.classList.add("active")}
+function resetAll(){if(confirm("Isso apagará todo o XP, níveis, missões e progresso. Continuar?")){localStorage.removeItem("rpgUltimate");location.reload()}}
+render();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
